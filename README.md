@@ -1,9 +1,7 @@
-<div class=container: flex;">
-  <img class="align-items: center" src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 400px; height: 350px;">
-</div>
-
 <p align="center">
-  <img class="align-items: center" src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 400px; height: 350px;"></p>
+  <img class="align-items: center" src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 400px; height: 350px;">
+</p>
+<br>
 
 ## Conexão com Mysql ok!
 
