@@ -2,6 +2,24 @@
 
 https://pkg.go.dev/github.com/gofiber/fiber/v2@v2.52.4#App.Listen
 
+
+# CRIANDO UM AMBIENTE VIRTUAL
+
+Bash
+go mod venv myenv
+
+Bash
+source myenv/bin/activate 
+
+# LIVE RELOAD PARA APLICAÇÕES GO 
+
+Bash
+go install github.com/cosmtrek/air@latest
+
+Bash
+go get -u github.com/cosmtrek/air
+
+
 # CRIANDO UM PROJETO SIMPLES COM GO E FIBER
 
 # Criação do Diretório do Projeto:
