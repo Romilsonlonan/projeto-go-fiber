@@ -1,4 +1,4 @@
-<div class="container-flex">
+<div class="container-flex style="display: flex; justify-content: center; align-items: center;">
   <img src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 400px; height: 350px;">
 </div>
 
