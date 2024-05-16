@@ -1,15 +1,6 @@
-![golang](https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33)
-
-![golang](https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33) {width: 200px height: 150px}
-
-<img src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 200px; height: 150px;">
-
-
+<div>
 <img src="https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/a2c8e078-efcf-4ba9-9cb2-4b9c70059c33" alt="Imagem Golang" style="width: 400px; height: 350px; align-item: center">
-
-
-
-
+</div>
 
 ## Conexão com Mysql ok!
 
