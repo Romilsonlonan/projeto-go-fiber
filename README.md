@@ -279,7 +279,7 @@ func Register(c *fiber.Ctx) error {
 // Função `Login` que recebe o contexto da requisição (`c`) e retorna um erro (`error`)
 func Login(c *fiber.Ctx) error {
     // Cria um mapa de string para string para armazenar os dados do formulário
-    var data map[string]string
+    var data map[string]string 
 
     // Tenta ler os dados do corpo da requisição e verifica se há erro
     if err := c.BodyParser(&data); err != nil {
@@ -288,13 +288,55 @@ func Login(c *fiber.Ctx) error {
     }
 
     // Cria uma variável para armazenar o usuário obtido do banco de dados
-    var user models.User
+    var user models.User 
 
     // Busca o usuário no banco de dados pelo e-mail informado
     database.DB.Where("email = ?", data["email"]).First(&user)
 
-    // Retorna o usuário encontrado como JSON na resposta
-    return c.JSON(user)
+    // Verifica se o usuário foi encontrado
+    if user.Id == 0 {
+        // Define o status HTTP para "Não encontrado" (404)
+        c.Status(404)
+
+        // Retorna uma mensagem de erro ao cliente
+        return c.JSON(fiber.Map{
+            "message": "Usuário não encontrado",
+        })
+    }
+
+    // Compara a senha informada com a senha do usuário no banco de dados
+    if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
+        // Define o status HTTP para "Requisição incorreta" (400)
+        c.Status(400)
+
+        // Retorna uma mensagem de erro ao cliente
+        return c.JSON(fiber.Map{
+            "message": "Senha Incorreta!",
+        })
+    }
+
+    // Cria as claims do token JWT
+    claims := jwt.RegisteredClaims{
+        ID: strconv.Itoa(int(user.Id)), // Define o ID do usuário como o ID do token
+        ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)), // Define a data de expiração do token para 24 horas a partir de agora
+    }
+
+    // Cria um novo token JWT com as claims e o método de assinatura ES256
+    jwtToken := *jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+
+    // Assina o token JWT com a chave secreta
+    token, err := jwtToken.SignedString([]byte("secret"))
+
+    // Verifica se ocorreu algum erro durante a assinatura do token
+    if err != nil {
+        // Retorna um erro interno do servidor
+        return c.SendStatus(fiber.StatusInternalServerError)
+    }
+
+    // Retorna o token JWT para o cliente
+    return c.JSON(fiber.Map{
+        "jwt": token,
+    })
 }
   
 ``` 
