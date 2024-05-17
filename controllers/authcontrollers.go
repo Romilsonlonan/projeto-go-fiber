@@ -108,8 +108,27 @@ func Login(c *fiber.Ctx) error {
         return c.SendStatus(fiber.StatusInternalServerError)
     }
 
-    // Retorna o token JWT para o cliente
+    // Cria um cookie para armazenar o token JWT
+    cookie := fiber.Cookie{
+        // Nome do cookie
+        Name: "jwt",
+
+        // Valor do cookie (o token JWT)
+        Value: token,
+
+        // Data de expiração do cookie (24 horas a partir de agora)
+        Expires: time.Now().Add(24 * time.Hour),
+
+        // Indica que o cookie só pode ser acessado pelo servidor (evita acesso por JavaScript)
+        HTTPOnly: true,
+    }
+
+    // Adiciona o cookie ao contexto da requisição
+    c.Cookie(&cookie)
+
+    // Retorna o token JWT para o cliente em formato JSON
     return c.JSON(fiber.Map{
         "jwt": token,
     })
+
 }
