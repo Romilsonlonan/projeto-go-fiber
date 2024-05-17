@@ -229,6 +229,8 @@ import ( // Importa dependências
 	"golang.org/x/crypto/bcrypt"
 )
 
+``` Go
+
 // Função `Register` que recebe o contexto da requisição (`c`) e retorna um erro (`error`)
 func Register(c *fiber.Ctx) error {
     // Cria um mapa de string para string para armazenar os dados do formulário
@@ -269,6 +271,11 @@ func Register(c *fiber.Ctx) error {
     return c.JSON(user)
 }
 
+``` 
+
+
+``` Go
+
 // Função `Login` que recebe o contexto da requisição (`c`) e retorna um erro (`error`)
 func Login(c *fiber.Ctx) error {
     // Cria um mapa de string para string para armazenar os dados do formulário
@@ -290,4 +297,4 @@ func Login(c *fiber.Ctx) error {
     return c.JSON(user)
 }
   
-
+``` 
