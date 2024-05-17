@@ -181,7 +181,23 @@ go get -u gorm.io/driver/mysql: Este comando utiliza a ferramenta go get para ba
 
 
 
+# INSTALAR BCRYPT 
 
+O bcrypt é um algoritmo de hash de senha robusto e amplamente utilizado, considerado uma escolha segura para armazenar senhas em aplicações web e outras plataformas.
+
+Vantagens do bcrypt:
+
+Segurança: O bcrypt é resistente a ataques de força bruta e rainbow table, tornando difícil para hackers decifrar senhas.
+Adaptabilidade: O bcrypt utiliza um custo de processamento configurável, permitindo ajustar a força do hashing de acordo com suas necessidades.
+Facilidade de uso: O bcrypt é fácil de implementar e utilizar em diversas linguagens de programação, incluindo Go.
+Considerações de segurança:
+
+Armazenar apenas hashes: Nunca armazene senhas em texto puro. Sempre utilize hashes como o bcrypt para proteger as senhas de seus usuários.
+Salgar hashes: Use um "sal" aleatório para adicionar uma camada extra de segurança ao hash. O sal é uma string única que é concatenada à senha antes do hashing.
+Atualizar regularmente o software: Mantenha o software do seu servidor e do bcrypt atualizados para garantir que você esteja protegido contra as últimas vulnerabilidades.
+
+Bash
+go get -u golang.org/x/crypto/bcrypto
 
 
 
