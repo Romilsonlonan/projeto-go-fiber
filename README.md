@@ -341,8 +341,5 @@ func Login(c *fiber.Ctx) error {
   
 ``` 
 
-# Teste no Insomnia
-
-![Captura de tela de 2024-05-17 12-11-08](https://github.com/Romilsonlonan/projeto-go-fiber/assets/90980220/aae0e7cf-5022-4778-be6d-fd9be0512e63)
 
 
