@@ -11,6 +11,10 @@ import ( // Importa dependências
 	"golang.org/x/crypto/bcrypt"
 )
 
+type Claims struct {
+    jwt.StandardClaims
+}
+
 // Função `Register` que recebe o contexto da requisição (`c`) e retorna um erro (`error`)
 func Register(c *fiber.Ctx) error {
     // Cria um mapa de string para string para armazenar os dados do formulário
@@ -92,7 +96,7 @@ func Login(c *fiber.Ctx) error {
 
     // Cria as claims do token JWT
     claims := jwt.RegisteredClaims{
-        ID: strconv.Itoa(int(user.Id)), // Define o ID do usuário como o ID do token
+        Issuer: strconv.Itoa(int(user.Id)), // Define o ID do usuário como o ID do token
         ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)), // Define a data de expiração do token para 24 horas a partir de agora
     }
 
@@ -131,4 +135,40 @@ func Login(c *fiber.Ctx) error {
         "jwt": token,
     })
 
+}
+
+
+func User(c *fiber.Ctx) error {
+    cookie := c.Cookies("jwt")
+    token, err := jwt.ParseWithClaims(cookie, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+        return []byte("secret"), nil
+    })
+    if err != nil || !token.Valid{
+        c.Status(fiber.StatusUnauthorized)
+        return c.JSON(fiber.Map{
+            "message": "unauthenticated",
+        })
+    }    
+    
+    claims := token.Claims.(*Claims)
+    id := claims.Issuer
+    var user models.User 
+    database.DB.Where("id = ?", id).First(&user)
+    return c.JSON(user)
+}
+
+func Logout(c *fiber.Ctx) error {
+    
+    cookie := fiber.Cookie{
+        Name: "jwt",
+        Value: "",
+        Expires: time.Now().Add(-time.Hour),
+        HTTPOnly: true,
+    }
+
+    c.Cookie(&cookie)
+
+    return c.JSON(fiber.Map{
+        "message": "Sucesso!!!",
+    })
 }
