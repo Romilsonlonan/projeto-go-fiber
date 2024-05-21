@@ -21,7 +21,7 @@ func main() {
 	
 }
 
-func Home(c *fiber.Ctx) error {
-	return c.SendString("Hello world!")
-}
+//func Home(c *fiber.Ctx) error {
+//	return c.SendString("Hello world!")
+//}
 
